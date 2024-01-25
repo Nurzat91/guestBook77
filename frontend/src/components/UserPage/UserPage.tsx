@@ -6,6 +6,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {loadingCreate} from "../../store/messagesSlice";
 import {createMessages} from "../../store/messagesThunks";
+import FileInput from "../FileInput/FileInput";
 
 
 const UserPage: React.FC = () => {
@@ -55,6 +56,9 @@ const UserPage: React.FC = () => {
               value={messages.description}
               onChange={inputChangeHandler}
             />
+          </Grid>
+          <Grid item xs sx={{m: 2}}>
+            <FileInput onChange={() => {}} name="image" label="Product image"/>
           </Grid>
           <Grid item xs sx={{m: 2}}>
             <LoadingButton

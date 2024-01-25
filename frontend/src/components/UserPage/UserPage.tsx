@@ -15,6 +15,7 @@ const UserPage: React.FC = () => {
   const [messages, setMessages] = useState<UserPageProps>({
     author: '',
     description: '',
+    image: null,
   });
 
   const formSubmitHandler = (e: React.FormEvent) => {
@@ -24,6 +25,7 @@ const UserPage: React.FC = () => {
     setMessages({
       author: '',
       description: '',
+      image: null,
     });
   };
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -32,6 +34,16 @@ const UserPage: React.FC = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, files} = e.target;
+    if (files) {
+      setMessages( prevState => ({
+        ...prevState,
+        [name]: files[0],
+      }));
+    }
   };
 
   return (
@@ -58,7 +70,11 @@ const UserPage: React.FC = () => {
             />
           </Grid>
           <Grid item xs sx={{m: 2}}>
-            <FileInput onChange={() => {}} name="image" label="Product image"/>
+            <FileInput
+              onChange={fileInputChangeHandler}
+              name="image"
+              label="Product image"
+            />
           </Grid>
           <Grid item xs sx={{m: 2}}>
             <LoadingButton

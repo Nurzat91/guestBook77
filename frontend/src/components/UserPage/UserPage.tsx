@@ -20,7 +20,12 @@ const UserPage: React.FC = () => {
 
   const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(createMessages(messages));
+    const author = messages.author.trim() !== '' ? messages.author : 'Anonymous';
+
+    dispatch(createMessages({
+      ...messages,
+      author,
+    }));
 
     setMessages({
       author: '',

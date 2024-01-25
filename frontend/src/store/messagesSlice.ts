@@ -18,7 +18,8 @@ const initialState: MessagesState = {
 export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder.addCase(createMessages.pending, (state) => {
       state.createLoading = true;
@@ -31,5 +32,7 @@ export const messagesSlice = createSlice({
     });
   }
 });
+
+
 export const messagesReducer = messagesSlice.reducer;
 export const loadingCreate = (state: RootState) => state.messages.createLoading;

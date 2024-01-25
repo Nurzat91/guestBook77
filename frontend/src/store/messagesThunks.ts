@@ -1,7 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../axiosApi";
-import {ApiUserPageProps, UserPage, UserPageProps} from "../types";
-import {AppDispatch} from "../app/store";
+import {ApiUserPageProps, UserPageProps} from "../types";
 
 export const createMessages = createAsyncThunk<void,UserPageProps>(
   'messages/create',
@@ -10,13 +9,13 @@ export const createMessages = createAsyncThunk<void,UserPageProps>(
   }
 );
 
-export const fetchMessages = createAsyncThunk<UserPage[], undefined, {dispatch: AppDispatch}>(
+export const fetchMessages = createAsyncThunk<UserPageProps[], undefined>(
   'messages/fetch',
   async () => {
-    const dataResponse = await axiosApi.get<ApiUserPageProps | null>('/messages');
+    const dataResponse = await axiosApi.get<ApiUserPageProps>('/messages');
     const fetchDataResponse = dataResponse.data;
 
-    let messagesList: UserPage[] = [];
+    let messagesList: UserPageProps[] = [];
 
     if (fetchDataResponse) {
       messagesList = Object.keys(fetchDataResponse).map(key => {
@@ -27,7 +26,6 @@ export const fetchMessages = createAsyncThunk<UserPage[], undefined, {dispatch: 
         }
       });
     }
-
     return messagesList;
   }
 );
